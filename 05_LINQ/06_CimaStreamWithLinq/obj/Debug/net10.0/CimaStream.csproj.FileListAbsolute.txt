@@ -1,0 +1,14 @@
+D:\projects\my-c#\TodoList\TodoList\CimaStream\bin\Debug\net10.0\CimaStream.exe
+D:\projects\my-c#\TodoList\TodoList\CimaStream\bin\Debug\net10.0\CimaStream.deps.json
+D:\projects\my-c#\TodoList\TodoList\CimaStream\bin\Debug\net10.0\CimaStream.runtimeconfig.json
+D:\projects\my-c#\TodoList\TodoList\CimaStream\bin\Debug\net10.0\CimaStream.dll
+D:\projects\my-c#\TodoList\TodoList\CimaStream\bin\Debug\net10.0\CimaStream.pdb
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.AssemblyInfoInputs.cache
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.AssemblyInfo.cs
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.csproj.CoreCompileInputs.cache
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.dll
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\refint\CimaStream.dll
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.pdb
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\CimaStream.genruntimeconfig.cache
+D:\projects\my-c#\TodoList\TodoList\CimaStream\obj\Debug\net10.0\ref\CimaStream.dll
