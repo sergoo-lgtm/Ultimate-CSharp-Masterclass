@@ -1,78 +1,101 @@
-# 🚀 Ultimate C# Masterclass: The Journey to Mastery
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0078D4&height=300&section=header&text=Ultimate%20C%23%20Masterclass&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=From%20Zero%20to%20Hero%20in%20.NET%20Ecosystem&descAlignY=55&descAlign=62" width="100%" alt="Header" />
+  
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=25&pause=1000&color=20B2AA&center=true&vCenter=true&width=500&lines=Mastering+Software+Architecture;Building+Robust+Back-end+Systems;Clean+Code+%26+Best+Practices;.NET+10+Ready+🚀" alt="Typing SVG" />
+  </a>
+</div>
 
-![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Active%20Learning-success?style=for-the-badge)
+<div align="center">
+  
+  ![.NET](https://img.shields.io/badge/.NET-10.0-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+  ![C#](https://img.shields.io/badge/C%23-12.0-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+  ![Status](https://img.shields.io/badge/Status-Active%20Dev-success?style=for-the-badge)
+  ![IDE](https://img.shields.io/badge/IDE-VS%20%26%20Rider-blue?style=for-the-badge&logo=visual-studio&logoColor=white)
 
-Welcome to my comprehensive C# learning repository. This is not just a collection of scripts; it is a structured documentation of my journey mastering **.NET**, **Software Architecture**, and **Clean Code principles**.
-
-Here, I dissect complex topics, build robust utilities, and implement real-world design patterns.
+</div>
 
 ---
 
-## 📂 Repository Structure (The Roadmap)
+## 🚀 About This Repository
 
-Each folder represents a specific module in the C# ecosystem, containing exercises and mini-projects relevant to that topic.
+Welcome to my **coding dojo**. This repository documents my journey from a physical therapist to a **Full-Stack Software Engineer**. It's not just a collection of scripts; it's a testament to mastering **Data Structures**, **Algorithms**, and **System Design** using C#.
 
-| Module | Topic | Key Concepts |
+> *"Talk is cheap. Show me the code."* — Linus Torvalds
+
+---
+
+## 🗺️ The Roadmap (Repository Structure)
+
+Each folder corresponds to a specific milestone in the .NET ecosystem, featuring real-world applications.
+
+| 📂 Module | 🏷️ Topic | 💻 Key Projects |
 | :--- | :--- | :--- |
-| `01_CSharpFundamentals` | **Core Basics** | Syntax, Variables, Control Flow, Debugging. |
-| `02_OOP` | **Object-Oriented Programming** | Classes, Interfaces, Inheritance, Polymorphism. |
-| `03_Exceptions` | **Error Handling** | Try-Catch, Custom Exceptions, Defensive Programming. |
-| `04_GenericTypes...` | **Generics & Methods** | Type Safety, Reusability, Extension Methods. |
-| `05_LINQ` | **Data Querying** | Lambda Expressions, Query Syntax, Data Manipulation. |
-| `06_NET_UnderTheHood` | **CLR & Memory** | Garbage Collection, Stack vs Heap, IL Code. |
-| `07_AdvancedCSharpTypes`| **Advanced Types** | Records, Structs, Enums, Tuples. |
-| `08_Collections` | **Data Structures** | Lists, Dictionaries, HashSets, LinkedLists. |
-| `09_Projects...` | **Architecture** | Assemblies, Namespaces, Dependency Management. |
-| `10_Strings` | **Text Processing** | StringBuilder, Regex, String Interpolation. |
-| `11_NumericTypes` | **Math & Precision** | Floating point accuracy, BigInteger, Decimal. |
-| `12_Events` | **Event-Driven** | Delegates, Events, Observer Pattern. |
-| `13_UnitTesting` | **Testing** | NUnit, Moq, Test-Driven Development (TDD). |
-| `14_CleanCode` | **Best Practices** | DRY, KISS, Refactoring, Naming Conventions. |
-| `15_Asynchrony...` | **Concurrency** | Async/Await, Tasks, Multithreading. |
-| `16_CSharpEvolution` | **Modern C#** | New features in C# 9, 10, 11, and 12. |
+| `01_CSharpFundamentals` | **Core Logic** | `Calculator`, `TodoList` |
+| `02_OOP` | **Object-Oriented Design** | `MazeGame`, `LibrarySystem`, `DiceRoll`, `TextAnalyzer` |
+| `03_Exceptions` | **Error Handling** | `GameDataParser` (JSON Validation) |
+| `04_GenericTypes...` | **Advanced Generics** | *Foundation for Caching Systems* |
+| `05_CustomCache` | **Caching Strategies** | `TechMarket`, `CustomCache` (Generic Constraints) |
+| `05_LINQ` | **Data Querying** | `CimaStream` (Complex Filtering) |
+| `06_NET_UnderTheHood` | **Memory & CSV** | `CsvProcessingImprovements` (Performance) |
+| `07_AdvancedCSharpTypes`| **Modern Types** | `StarWarsPlanetsStats` (Records & Structs) |
+| `08_Collections` | **Data Structures** | `CustomLinkedList` (Implementation from scratch) |
+| `09_Strings` | **Text Manipulation** | `TicketsDataAggregator` |
+| `10_Events` | **Event-Driven Arch** | `FirstWinFormsApp`, `NumericTypesSuggester` |
+| `11_UnitTesting` | **Quality Assurance** | `DiceRollGameTests`, `FibonacciGenerator` |
+| `12_CleanCode` | **Best Practices** | `PasswordGenerator` (Refactoring & TDD) |
+| `13_Asynchrony...` | **Concurrency** | *Async/Await Implementation* |
 
 ---
 
-## 🏆 Featured Projects (The Highlights)
+## 🏆 Featured Projects Highlights
 
-A showcase of the most complex and well-architected applications in this repository.
+### 🌌 [Star Wars Planets Stats](./07_AdvancedCSharpTypes)
+*A data processing tool dealing with API-like responses.*
+- **Tech Stack:** Records, Structs, HTTP Logic.
+- **Key Concept:** Immutability and efficient data transfer objects (DTOs).
 
-### 🎮 [Maze Game](./02_OOP) *(Console)*
-A retro-style maze exploration game featuring procedural rendering and collision detection.
-* **Tech:** Polymorphism, Interfaces, 2D Arrays.
-* **Key Feature:** Custom rendering engine using Emoji support.
+### 🎬 [CimaStream (LINQ)](./05_LINQ)
+*A simulation of a streaming service backend.*
+- **Tech Stack:** LINQ, Lambda Expressions, Extension Methods.
+- **Key Concept:** Writing declarative code to filter, sort, and project complex data sets efficiently.
 
-### 📄 [Game Data Parser](./03_Exceptions) *(Utility)*
-A robust JSON parser designed to handle malformed data gracefully.
-* **Tech:** File I/O, JSON Serialization, Custom Exception Handling.
-* **Key Feature:** Highlights the exact line of error in invalid JSON files with visual pointers.
+### 🎮 [Retro Maze Game](./02_OOP)
+*A console-based exploration game.*
+- **Tech Stack:** 2D Arrays, Polymorphism, Interface Segregation.
+- **Key Concept:** Rendering a UI engine purely in the console using ASCII/Emoji.
 
-### 📚 [Library Management System](./04_GenericTypesAndAdvancedUseOfMethods) *(System)*
-A tracking system for books and users, separating "Librarian" and "User" roles.
-* **Tech:** Inheritance, Abstraction, Role-Based Logic.
-* **Key Feature:** Distinct workflows for admins and regular users.
-
-### 📊 [Text Data Analyzer](./02_OOP) *(Tool)*
-A polymorphic file scanner that analyzes `.txt` and `.csv` files automatically.
-* **Tech:** Strategy Pattern (via Interfaces), Batch Processing.
-* **Key Feature:** Extensible design allows adding new file formats easily.
+### ⚡ [Custom Cache System](./05_CustomCache)
+*A high-performance caching layer.*
+- **Tech Stack:** Generics (`T`), Dictionary Lookups.
+- **Key Concept:** Reducing load times by implementing the "Decorator Pattern" for caching.
 
 ---
 
-## 🧠 Technical Focus & Skills Gained
+## 🛠️ Skills & Technologies
 
-This repository is built with a focus on:
-* **SOLID Principles:** Ensuring code is maintainable and scalable.
-* **Clean Architecture:** Separation of concerns (UI, Logic, Data).
-* **Performance:** Memory management and efficient LINQ queries.
-* **Modern .NET:** Utilizing the latest language features.
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=cs,dotnet,git,github,visualstudio,docker,linux,mysql" />
+</div>
+
+- **Language:** C# (Latest Features)
+- **Framework:** .NET Core / .NET 5+ to .NET 10
+- **Principles:** SOLID, DRY, KISS, OOP
+- **Testing:** NUnit, Unit Testing Principles
 
 ---
 
-## 🤝 Connect
+## 📬 Connect
 
-If you find this repository helpful or have suggestions for refactoring, feel free to reach out or open a PR!
+If you're a recruiter or a fellow developer, let's connect! I'm open to code reviews and collaboration.
 
-**Happy Coding! 💻**
+<div align="center"> 
+  <a href="https://github.com/youssef" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank" />
+  </a>
+  <a href="https://linkedin.com/in/youssef" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank" />
+  </a>
+</div>
+
+<p align="center">Made with ❤️ and a lot of ☕ in Egypt.</p>
