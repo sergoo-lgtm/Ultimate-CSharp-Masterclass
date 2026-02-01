@@ -1,0 +1,14 @@
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\bin\Debug\net7.0\NetUnderTheHoodAssignment.exe
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\bin\Debug\net7.0\NetUnderTheHoodAssignment.deps.json
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\bin\Debug\net7.0\NetUnderTheHoodAssignment.runtimeconfig.json
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\bin\Debug\net7.0\NetUnderTheHoodAssignment.dll
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\bin\Debug\net7.0\NetUnderTheHoodAssignment.pdb
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.AssemblyInfoInputs.cache
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.AssemblyInfo.cs
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.csproj.CoreCompileInputs.cache
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.dll
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\refint\NetUnderTheHoodAssignment.dll
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.pdb
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\NetUnderTheHoodAssignment.genruntimeconfig.cache
+C:\Users\Yousef\Downloads\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\NetUnderTheHoodAssignment\obj\Debug\net7.0\ref\NetUnderTheHoodAssignment.dll
