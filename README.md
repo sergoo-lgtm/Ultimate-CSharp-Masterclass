@@ -90,10 +90,8 @@ Each folder corresponds to a specific milestone in the .NET ecosystem, featuring
 If you're a recruiter or a fellow developer, let's connect! I'm open to code reviews and collaboration.
 
 <div align="center"> 
-  <a href="https://github.com/youssef" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank" />
-  </a>
-  <a href="https://linkedin.com/in/youssef" target="_blank">
+
+  <a href="https://www.linkedin.com/in/yousef-serag-b2b975243/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank" />
   </a>
 </div>
