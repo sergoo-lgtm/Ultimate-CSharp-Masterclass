@@ -1,53 +1,61 @@
-# 🏰 Object-Oriented Programming (OOP) Workshop
+<div align="center">
 
-![C# OOP](https://img.shields.io/badge/Concept-Object_Oriented_Design-purple?style=for-the-badge&logo=c-sharp&logoColor=white)
-![Status](https://img.shields.io/badge/Projects-4_Completed-success?style=for-the-badge)
+# 🏗️ The OOP Laboratory: Building Robust Systems
 
-Welcome to the **OOP Laboratory**. This directory marks the transition from basic scripting to **Software Engineering**. Here, every project is crafted to demonstrate specific pillars of OOP: **Encapsulation**, **Inheritance**, **Polymorphism**, and **Abstraction**.
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Laptop.png" alt="Laptop" width="120" />
 
-## 🎯 Learning Goals
+*Transitioning from basic scripting to professional Software Engineering. This directory is a collection of projects crafted to master the core pillars of Object-Oriented Programming.*
 
-The goal of this module is to move away from "Spaghetti Code" and start building systems that are:
-* **Maintainable:** Easy to fix and update.
-* **Extensible:** Easy to add new features without breaking old ones.
-* **Reusable:** Components can be used in different parts of the app.
+[![C#](https://img.shields.io/badge/Language-C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)]()
+[![OOP](https://img.shields.io/badge/Architecture-OOP_Design-FFB900?style=for-the-badge&logo=microsoft&logoColor=white)]()
+[![Projects](https://img.shields.io/badge/Projects-5_Completed-success?style=for-the-badge)]()
+
+</div>
+
+---
+
+## 🎯 The Engineering Goals
+
+The primary objective of this module is to write code that isn't just "working", but is:
+* 🛠️ **Maintainable:** Easy to debug, fix, and update without breaking existing logic.
+* 🚀 **Extensible:** Adding new features requires minimal changes to the core engine.
+* ♻️ **Reusable:** Components are modular and can be plugged into different parts of the system.
 
 ---
 
 ## 📂 Project Catalog
 
-Each project in this folder targets a specific set of OOP skills.
+Each project targets a specific set of skills, increasing in complexity.
 
-| Project Folder | Difficulty | Key Concepts Covered |
-| :--- | :--- | :--- |
-| **[🎲 Dice Roll Game](./02_DiceRollGame)** | 🟢 Beginner | **Classes & Objects**, Separation of Concerns, Input Validation. |
-| **[📚 Library System](./02_LibrarySystem)** | 🟡 Intermediate | **Inheritance**, **Abstraction**, Role-Based Logic (Admin vs User). |
-| **[🧩 Maze Game](./02_MAZEGAME)** | 🔴 Advanced | **Interfaces**, **Polymorphism**, 2D Arrays, Game Logic. |
-| **[📊 Text Analyzer](./02_TextDataAnalyzer)** | 🟠 Intermediate | **Polymorphism**, Strategy Pattern, File I/O, Structs. |
+| Project | Difficulty | Focus Area | Core OOP Concepts Explored |
+| :--- | :--- | :--- | :--- |
+| **[🎲 01. Dice Roll Game](./02_DiceRollGame)** | 🟢 Beginner | State Management | Encapsulation, Classes & Objects |
+| **[📚 02. Library System](./02_LibrarySystem)** | 🟡 Intermediate | Domain Modeling | Inheritance, Abstraction, Role Logic |
+| **[📊 03. Text Analyzer](./02_TextDataAnalyzer)** | 🟠 Intermediate | Data Parsing | Polymorphism, Strategy Pattern, File I/O |
+| **[🧩 04. Maze Game](./02_MAZEGAME)** | 🔴 Advanced | Grid Logistics | Interfaces, Polymorphism, 2D Arrays |
+| **[🐍 05. Snake Game](./02_SnakeGame)** | 🔴 Advanced | Game Loop Engine | Memory Management (Structs), Data Structures (`LinkedList`), Strict Encapsulation |
 
 ---
 
-## 🧠 OOP Pillars in Action
+## 🧠 The Architecture Mindmap
 
-Here is how these projects map to the core principles of OOP:
+How these projects map to the 4 Core Pillars of Object-Oriented Programming:
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#ff9900', 'edgeLabelBackground':'#111'}}}%%
 graph TD
-    OOP[OOP Pillars]
-    
-    subgraph P1 [Encapsulation]
-    D[Dice Game] -->|Private Fields| ProtectData[Protect State]
-    end
-    
-    subgraph P2 [Inheritance]
-    L[Library System] -->|User -> Librarian| Reuse[Reuse Logic]
-    end
-    
-    subgraph P3 [Polymorphism]
-    T[Text Analyzer] -->|IFileAnalysis| Flex[Flexible Behavior]
-    M[Maze Game] -->|IMazeItem| Unified[Unified Interface]
-    end
+    A{⚙️ Core OOP Pillars} --> B(🔒 Encapsulation)
+    A --> C(🧬 Inheritance)
+    A --> D(🎭 Polymorphism)
+    A --> E(🛡️ Abstraction)
 
-    OOP --> P1
-    OOP --> P2
-    OOP --> P3
+    B -->|Hides Internal State| P1[🎲 Dice Game]
+    B -->|Protects Game Loop Logic| P5[🐍 Snake Game]
+    
+    C -->|Reuses Base Entity Logic| P2[📚 Library System]
+    
+    D -->|Executes Flexible Strategies| P3[📊 Text Analyzer]
+    D -->|Manages Dynamic Entities| P4[🧩 Maze Game]
+    
+    E -->|Defines Strict Contracts| P4
+    E -->|Enforces Business Rules| P2
