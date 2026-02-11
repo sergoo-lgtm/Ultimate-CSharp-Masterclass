@@ -5,9 +5,9 @@ namespace MAZEGAME
     {
         public int x { get; set; }
         public int y { get; set; }
-        public string sympol { get => "😋"; set; }
+        public string Symbol { get; set; } = "😋";
 
-        bool IMazeItem.ISsolid => true;
+        bool IMazeItem.IsSolid => true;
 
         
     }

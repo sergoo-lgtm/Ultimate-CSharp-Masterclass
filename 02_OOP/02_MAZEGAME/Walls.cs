@@ -4,7 +4,7 @@ namespace MAZEGAME
 {
     internal class Walls : IMazeItem
     {
-          string IMazeItem.sympol { get => "🧱"; }
-         bool IMazeItem.ISsolid { get => true;}
+          string IMazeItem.Symbol { get => "🧱"; }
+         bool IMazeItem.IsSolid { get => true;}
     }
 }

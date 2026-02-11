@@ -3,7 +3,7 @@ namespace MAZEGAME
 {
     internal interface IMazeItem
     {
-         string sympol {  get;  }
-         bool ISsolid { get; }
+         string Symbol {  get;  }
+         bool IsSolid { get; }
     }
 }

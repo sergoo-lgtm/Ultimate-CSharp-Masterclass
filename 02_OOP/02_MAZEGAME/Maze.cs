@@ -13,15 +13,50 @@ namespace MAZEGAME
         IMazeItem[,] arrOfmazeShape;
 
         public Maze(int width, int height)
-        {   _width = width;
+        {   
+            _width = width;
             _height = height;
             arrOfmazeShape = new IMazeItem[_width, _height];
-             _player = new Player();
+            _player = new Player();
             _player.x = 1;
             _player.y = 1;
+            
+            InitializeMaze();
         }
 
-
+        private void InitializeMaze()
+        {
+            for (int y = 0; y < _height; y++)
+            {
+                for (int x = 0; x < _width; x++) 
+                {
+                    if (x == _width -1 && y == _height -1)
+                    {
+                        arrOfmazeShape[x, y] = new Emptyway();
+                    }
+                    else if (x == _width - 2 && y == _height - 2)
+                    {
+                        arrOfmazeShape[x, y] = new Emptyway();
+                    }
+                    else if (x == 0 || y == 0 || x == _width - 1 || y == _height - 1)
+                    {
+                        arrOfmazeShape[x, y] = new Walls();
+                    }
+                    else if (x % 5  == 0 && y % 5 == 0)
+                    {
+                        arrOfmazeShape[x, y] = new Walls();
+                    }
+                    else if (x % 2 == 0 && y % 3 == 0)
+                    {
+                        arrOfmazeShape[x, y] = new Walls();
+                    }
+                    else
+                    {
+                        arrOfmazeShape[x, y] = new Emptyway();
+                    }
+                }
+            }
+        }
 
         public void MovePlayer()
         {
@@ -42,98 +77,40 @@ namespace MAZEGAME
                 case ConsoleKey.RightArrow:
                     UpdatePlayer(1 , 0);
                     break;
-
             }
-
         }
-
-
-
-
 
         private void UpdatePlayer(int dx , int dy)
         {
-           
-           int newX = _player.x + dx;
-           int newY = _player.y + dy;
+            int newX = _player.x + dx;
+            int newY = _player.y + dy;
 
-            if (newX < _width && newX>=0&& newY >= 0 && newY < _height && arrOfmazeShape[newX, newY].ISsolid == false)
+            // Check boundaries and collision
+            if (newX >= 0 && newX < _width && newY >= 0 && newY < _height && arrOfmazeShape[newX, newY].IsSolid == false)
             { 
                 _player.x = newX; 
                 _player.y = newY;
-                draw();
             }
-
         }
 
-
-
-        public void draw()
+        public void Draw()
         {
-
             Console.Clear();
             for (int y = 0; y < _height; y++)
             {
-                
-
                 for (int x = 0; x < _width; x++) 
                 {
-                    if (x == _width -1 && y == _height -1)
+                    if (x == _player.x && y == _player.y)
                     {
-                       arrOfmazeShape[x, y] = new Emptyway();
-                        Console.Write(arrOfmazeShape[x, y].sympol);
-                       
-
-                    }
-                    if (x == _width - 2 && y == _height - 2)
-                    {
-                        arrOfmazeShape[x, y] = new Emptyway();
-                        Console.Write(arrOfmazeShape[x, y].sympol);
-
-
-                    }
-
-
-                    else if (x == 0 || y == 0 || x == _width - 1 || y == _height - 1)
-                    {
-                        arrOfmazeShape[x, y] = new Walls();
-                        Console.Write(arrOfmazeShape[x, y].sympol);
-                    }
-                    else if (x == _player.x && y == _player.y)
-                    {
-                        Console.Write(_player.sympol);
-                    }
-                    else if (x %5  == 0 && y % 5 == 0)
-                    {
-                        arrOfmazeShape[x, y] = new Walls();
-                        Console.Write(arrOfmazeShape[x, y].sympol);
-                    }
-                    else if (x % 2 == 0 && y % 3 == 0)
-                    {
-                        arrOfmazeShape[x, y] = new Walls();
-                        Console.Write(arrOfmazeShape[x, y].sympol);
+                        Console.Write(_player.Symbol);
                     }
                     else
                     {
-                        arrOfmazeShape[x, y] = new Emptyway();
-                        Console.Write(arrOfmazeShape[x, y].sympol);
+                        Console.Write(arrOfmazeShape[x, y].Symbol);
                     }
-
-
                 }
-
-
-
                 Console.WriteLine();
-
             }
-
-
-
         }
-
-
-
-
     }
 }
