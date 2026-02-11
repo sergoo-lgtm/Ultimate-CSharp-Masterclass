@@ -1,50 +1,72 @@
-# 🎮 Game Data Parser
+<div align="center">
 
-A robust, console-based C# application designed to parse, validate, and display video game data from JSON files. This project serves as a practical demonstration of **SOLID principles**, **Dependency Injection**, and **Defensive Programming**.
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Video%20Game.png" alt="Controller" width="120" />
 
-## 🚀 Overview
+# 🎮 Game Data Parser: Bulletproof JSON Processing
 
-**GameDataParser** isn't just a file reader; it's an architectural showcase. It decouples the processes of reading files, parsing data, and user interaction, making the application highly maintainable and testable.
+*A masterclass in Defensive Programming and SOLID principles. Because in the real world, data is messy, and applications shouldn't crash.*
 
-It features a custom error-reporting system that highlights syntax errors in malformed JSON files, providing context to the user immediately.
+[![C#](https://img.shields.io/badge/C%23-12.0-239120?style=for-the-badge&logo=c-sharp&logoColor=white)]()
+[![SOLID](https://img.shields.io/badge/Architecture-SOLID-FF9900?style=for-the-badge)]()
+[![Clean Code](https://img.shields.io/badge/Pattern-Dependency_Injection-0078D4?style=for-the-badge)]()
 
-## ✨ Key Features
+</div>
 
-* **Clean Architecture:** Built using Interfaces (`IFileReader`, `IGameParser`, `ILogger`, `IUserInteractor`) to ensure low coupling.
-* **Smart Error Handling:**
-    * Catches `JsonException` and identifies the exact line of failure.
-    * Displays a snippet of the file with a visual pointer (`>>>>>>>>`) to the error.
-* **Logging:** Automatically logs exceptions to a local `log.txt` file for debugging.
-* **User-Friendly Interface:** Interactive console prompts with clear validation messages.
+---
 
-## 🏗️ Architecture & Design Pattern
+## 📖 The Story Behind The Code
 
-The project implements a **Manual Dependency Injection** pattern.
+Most console parsers just attempt to read a file and throw an ugly system exception if something goes wrong. **GameDataParser** takes a different approach. It acts as an architectural showcase of how to build resilient, decoupled backend systems. 
+
+**The core philosophy?** To completely separate the concerns of file reading, data deserialization, background logging, and user interaction. If the JSON format changes tomorrow, or we decide to log errors to a cloud database instead of a local text file, the core orchestration logic remains completely untouched.
+
+---
+
+## ✨ Why This Architecture Works
+
+* 🛡️ **Defensive Programming:** Anticipates malformed data. Instead of failing silently or crashing abruptly, it catches `JsonException` and points the user *directly* to the exact line of the syntax error with a visual indicator (`>>>>>>>>`).
+* 🧩 **Manual Dependency Injection:** Demonstrates a fundamental understanding of **Inversion of Control (IoC)** by injecting dependencies via constructors, without relying on heavy external DI containers.
+* 📝 **Resilient Background Logging:** Automatically intercepts exceptions and writes stack traces to a local `log.txt`, keeping the user console clean while maintaining strict audit trails for developers.
+* 🔌 **Plug-and-Play Interfaces:** Achieves extremely low coupling through strict interface segregation. 
+
+---
+
+## 🏗️ System Architecture
+
+*A visual representation of how the orchestrator communicates exclusively via abstractions, ensuring high testability and maintainability.*
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#0078D4', 'edgeLabelBackground':'#111'}}}%%
 classDiagram
+    direction TB
+    
     class GameDataParserApp {
         +Start()
     }
-    class IFileReader {
-        <<interface>>
-        +Read(filename)
-    }
-    class IGameParser {
-        <<interface>>
-        +JsonParse(content)
-    }
-    class ILogger {
-        <<interface>>
-        +Log(message)
-    }
-    class IUserInteractor {
-        <<interface>>
-        +GameName()
-        +Gamedisplay()
+    
+    namespace Abstractions {
+        class IFileReader {
+            <<interface>>
+            +Read(filename) String
+        }
+        class IGameParser {
+            <<interface>>
+            +JsonParse(content) GameData
+        }
+        class ILogger {
+            <<interface>>
+            +Log(message)
+        }
+        class IUserInteractor {
+            <<interface>>
+            +GetGameName() String
+            +DisplayGame(GameData)
+        }
     }
 
-    GameDataParserApp --> IFileReader
-    GameDataParserApp --> IGameParser
-    GameDataParserApp --> ILogger
-    GameDataParserApp --> IUserInteractor
+    GameDataParserApp ..> IFileReader : Injects
+    GameDataParserApp ..> IGameParser : Injects
+    GameDataParserApp ..> ILogger : Injects
+    GameDataParserApp ..> IUserInteractor : Injects
+    
+    note for GameDataParserApp "Acts as the Application Engine.\nDepends entirely on abstractions, not concretions."
