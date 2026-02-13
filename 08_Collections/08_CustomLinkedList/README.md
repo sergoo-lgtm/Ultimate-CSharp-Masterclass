@@ -5,117 +5,77 @@
 </p>
 
 <p align="center">
-  <b>A Fully Custom Generic Linked List Implementation in C#</b><br>
-  Built from scratch with IEnumerator, ICollection, and Yield.
+  <b>A Fully Custom Generic Singly Linked List Implementation in C#</b><br>
+  Built completely from scratch using Generics, ICollection, IEnumerable, and yield return.
 </p>
 
 ---
 
-## 🎯 Project Goal
+# 🎯 Project Goal
 
-This project demonstrates how to build a **Generic Singly Linked List** from scratch in C#  
-WITHOUT using `List<T>` or built-in collections.
+This project demonstrates how to build a **Generic Singly Linked List**  
+WITHOUT using `List<T>` or any built-in collection.
 
-It implements:
+It manually implements:
 
 - `ICollection<T>`
 - Custom `ILinkedList<T>`
 - `IEnumerator<T>` using `yield return`
-- Generic Node system
+- Custom `Node<T>` structure
 
 ---
 
+# 🧠 Core Concepts Used
 
-### Why?
+## ✅ Generics
 
-Because we want the list to work with:
+```csharp
+public class CustomLinkedList<T>
+```
+
+One implementation works with:
 
 - string
 - int
 - double
-- Custom classes
-- Anything.
+- custom classes
+- anything
 
-Without generics → we would need multiple versions of the same list.
-
-With generics → one clean reusable implementation.
+Reusable. Clean. Scalable.
 
 ---
 
-## 🔁 2️⃣ IEnumerable + yield return
-
-Instead of writing a bulky Enumerator class manually, we used:
+## ✅ IEnumerable + yield return
 
 ```csharp
 yield return current.Value;
 ```
 
-This automatically builds the Enumerator behind the scenes.
-
-That allows this:
+Allows:
 
 ```csharp
 foreach(var item in list)
 ```
 
-Without writing 40+ lines of iterator logic.
-
-Cleaner.
-Smarter.
-More readable.
+Without manually writing an Enumerator class.
 
 ---
 
-## 📦 3️⃣ ICollection<T>
-
-We implemented:
-
-```csharp
-public interface ILinkedList<T> : ICollection<T>
-```
-
-This forces us to implement:
-
-- Add
-- Remove
-- Contains
-- Clear
-- CopyTo
-- Count
-- IsReadOnly
-
-Why is this important?
-
-Because now our list behaves like any real .NET collection.
-
-Professional level structure.
-
----
-
-## 🔗 4️⃣ Manual Node Linking
-
-Instead of using List<T>, we manually created:
+## ✅ Manual Node Structure
 
 ```csharp
 public class Node<T>
+{
+    public T Value { get; set; }
+    public Node<T>? Next { get; set; }
+}
 ```
 
-Each node contains:
-
-- Value
-- Next pointer
-
-So internally the list looks like:
+Internal structure:
 
 ```
-[Head] → [Node] → [Node] → [Node] → null
+Head → Node → Node → Node → null
 ```
-
-This gives full control over:
-
-- Memory structure
-- Traversal logic
-- Insert/remove behavior
 
 ---
 
@@ -135,16 +95,6 @@ class ILinkedList~T~ {
     +AddToEnd(T)
 }
 
-class ICollection~T~ {
-    <<interface>>
-    +Add(T)
-    +Remove(T)
-    +Contains(T)
-    +Clear()
-    +CopyTo(T[], int)
-    +Count
-}
-
 class CustomLinkedList~T~ {
     +Node~T~ Head
     +int Count
@@ -159,109 +109,69 @@ class CustomLinkedList~T~ {
 }
 
 CustomLinkedList --|> ILinkedList
-CustomLinkedList --|> ICollection
 CustomLinkedList --> Node
 ```
 
 ---
 
-
-# 🧱 Internal Structure Visualization
-
-When items are added like this:
-
-```csharp
-myPlaylist.Add("Shape of You");
-myPlaylist.AddToFront("Intro Song");
-myPlaylist.AddToEnd("Believer");
-```
-
-Internally the memory becomes:
-
-```
-Head
- ↓
-[Intro Song] → [Shape of You] → [Believer] → null
-```
-
-Each node points to the next one.
-
-The last node always points to null.
+# ⚙️ Methods & Visual Demonstration
 
 ---
 
-# ⚙️ Methods Overview
+# ➕ AddToFront(T item)
 
----
+### 🧠 What It Does
 
-## ➕ Add(T item)
-
-Default behavior:
-
-```csharp
-AddToEnd(item);
-```
-
-Always inserts at the end.
-
-Time Complexity: O(n)
-
----
-
-## ➕ AddToFront(T item)
-
-Steps:
-
-1. Create new node
-2. Point newNode.Next to current Head
-3. Move Head to new node
+1. Create new node  
+2. Point it to current Head  
+3. Move Head to new node  
 
 ```csharp
 newNode.Next = Head;
 Head = newNode;
 ```
 
-Time Complexity: O(1)
+### ⏱ Complexity
 
-Fastest operation in linked list.
+O(1)
 
----
+### 🎬 Animation
 
-## ➕ AddToEnd(T item)
-
-Steps:
-
-1. If Head is null → create first node
-2. Otherwise traverse until last node
-3. Attach new node
-
-Time Complexity: O(n)
+<p align="center">
+  <img src="assets/add-to-front.svg" width="600"/>
+</p>
 
 ---
 
-## 🔎 Contains(T item)
+# ➕ AddToEnd(T item)
 
-Traversal logic:
+### 🧠 What It Does
 
-```csharp
-while(current != null)
-```
+1. If list empty → create first node  
+2. Traverse to last node  
+3. Attach new node  
 
-Compare each value.
+### ⏱ Complexity
 
-Return true if found.
+O(n)
 
-Time Complexity: O(n)
+### 🎬 Animation
+
+<p align="center">
+  <img src="assets/add-to-end.svg" width="700"/>
+</p>
 
 ---
 
-## ❌ Remove(T item)
+# ❌ Remove(T item)
 
-Three scenarios:
+### 🧠 What It Does
 
-1️⃣ Empty list → return false  
-2️⃣ Removing Head → move Head to next  
-3️⃣ Removing middle/last → bypass the node  
+Three cases:
+
+1. Empty list → return false  
+2. Removing Head → move Head  
+3. Removing middle node → bypass it  
 
 Core logic:
 
@@ -269,34 +179,41 @@ Core logic:
 current.Next = current.Next.Next;
 ```
 
-Time Complexity: O(n)
+### ⏱ Complexity
+
+O(n)
+
+### 🎬 Animation
+
+<p align="center">
+  <img src="assets/remove.svg" width="700"/>
+</p>
 
 ---
 
-## 🧹 Clear()
+# 🔎 Contains(T item)
+
+### 🧠 What It Does
+
+Traverses node by node:
 
 ```csharp
-Head = null;
-Count = 0;
+while(current != null)
 ```
 
-All nodes become unreachable → Garbage Collector removes them.
+Returns true if match found.
 
-Time Complexity: O(1)
+### ⏱ Complexity
 
----
-
-## 📦 CopyTo(T[] array, int index)
-
-Copies list items to an existing array.
-
-Starts copying from the given index.
-
-Used to integrate with array-based systems.
+O(n)
 
 ---
 
-## 🔁 GetEnumerator()
+# 🔁 GetEnumerator()
+
+### 🧠 What It Does
+
+Enables foreach traversal.
 
 ```csharp
 while (current != null)
@@ -305,38 +222,36 @@ while (current != null)
 }
 ```
 
-Enables:
+### ⏱ Complexity
 
-```csharp
-foreach(var item in list)
-```
+O(n)
 
-Without manually implementing IEnumerator class.
+### 🎬 Traversal Animation
+
+<p align="center">
+  <img src="assets/traversal.svg" width="700"/>
+</p>
 
 ---
 
-# 🖥️ Demo Explanation (Program.cs)
-
-The demo simulates a music playlist.
-
-Operations tested:
-
-- Creating list
-- Adding songs
-- Searching songs
-- Removing songs
-- Copying to array
-- Clearing the list
-- Iterating with foreach
-
-It also uses:
+# 🧹 Clear()
 
 ```csharp
-Console.ForegroundColor
-Console.ReadKey();
+Head = null;
+Count = 0;
 ```
 
-To simulate interactive output and better visualization.
+Garbage Collector removes nodes.
+
+⏱ O(1)
+
+---
+
+# 📦 CopyTo(T[] array, int index)
+
+Copies list values into array starting at index.
+
+⏱ O(n)
 
 ---
 
@@ -353,26 +268,24 @@ To simulate interactive output and better visualization.
 
 ---
 
-# 🚀 Possible Improvements
+# 🚀 Future Improvements
 
-Future enhancements could include:
-
-- Adding Tail pointer → make AddToEnd O(1)
-- Converting to Doubly Linked List
-- Adding Reverse() method
-- Adding InsertAt(index)
-- Implementing thread safety
-- Making it immutable
+- Add Tail pointer → O(1) AddToEnd
+- Convert to Doubly Linked List
+- Add Reverse()
+- Add InsertAt(index)
+- Add thread safety
+- Make immutable version
 
 ---
 
-# 🎓 What This Project Proves
+# 🎓 What This Project Demonstrates
 
-✔️ Deep understanding of data structures  
-✔️ Strong OOP design  
-✔️ Knowledge of .NET collection contracts  
-✔️ Ability to build core infrastructure manually  
-✔️ Interview-ready level implementation  
+✔ Deep understanding of data structures  
+✔ Strong OOP implementation  
+✔ Knowledge of .NET collection contracts  
+✔ Manual memory-style node linking  
+✔ Clean enumerator implementation  
 
 ---
 
