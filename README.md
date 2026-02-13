@@ -32,7 +32,7 @@ Each folder corresponds to a specific milestone in the .NET ecosystem, featuring
 | 📂 Module | 🏷️ Topic | 💻 Key Projects |
 | :--- | :--- | :--- |
 | `01_CSharpFundamentals` | **Core Logic** | `Calculator`, `TodoList` |
-| `02_OOP` | **Object-Oriented Design** | `MazeGame`, `LibrarySystem`, `DiceRoll`, `TextAnalyzer` |
+| `02_OOP` | **Object-Oriented Design** | `MazeGame`, `SnakeGame`, `LibrarySystem`, `DiceRoll`, `TextAnalyzer` |
 | `03_Exceptions` | **Error Handling** | `GameDataParser` (JSON Validation) |
 | `04_GenericTypes...` | **Advanced Generics** | *Foundation for Caching Systems* |
 | `05_CustomCache` | **Caching Strategies** | `TechMarket`, `CustomCache` (Generic Constraints) |
@@ -59,6 +59,11 @@ Each folder corresponds to a specific milestone in the .NET ecosystem, featuring
 *A simulation of a streaming service backend.*
 - **Tech Stack:** LINQ, Lambda Expressions, Extension Methods.
 - **Key Concept:** Writing declarative code to filter, sort, and project complex data sets efficiently.
+
+### 🐍 [Terminal Snake Game](./02_OOP)
+*A classic retro game engineered with robust Object-Oriented principles.*
+- **Tech Stack:** `LinkedList<T>`, Structs, Encapsulation, Game Loop.
+- **Key Concept:** Achieving O(1) time complexity for movement and efficient memory management avoiding garbage collection overhead.
 
 ### 🎮 [Retro Maze Game](./02_OOP)
 *A console-based exploration game.*
