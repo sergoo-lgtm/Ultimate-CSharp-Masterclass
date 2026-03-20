@@ -14,31 +14,27 @@ namespace Football_Leage
 
         public void AddCoach(AddCoachDto coachDto)
         {
-            if (string.IsNullOrWhiteSpace(coachDto.Name))
+            try
             {
-                Console.WriteLine("Coach name is required");
-                return;
+                var coach = new Coach(coachDto.Name, coachDto.Description);
+                _coachRepo.Add(coach);
             }
-
-            var coach = new Coach
+            catch (Exception ex)
             {
-                Name = coachDto.Name,
-                CreationDate = DateTime.Now
-            };
-
-            _coachRepo.Add(coach);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void UpdateCoach(UpdateCoachDto coachDto)
         {
             var coach = _coachRepo.GetById(coachDto.CoachId);
+
             if (coach == null)
-            {
-                throw new KeyNotFoundException($"Team with ID {coachDto.CoachId} not found.");
+                throw new KeyNotFoundException($"Coach with ID {coachDto.CoachId} not found.");
 
-            }
+            coach.UpdateName(coachDto.Name);
+            coach.UpdateDescription(coachDto.Description);
 
-            coach.Name = coachDto.Name;
             _coachRepo.Update(coach);
         }
 

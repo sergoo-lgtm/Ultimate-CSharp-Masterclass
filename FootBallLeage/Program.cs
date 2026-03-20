@@ -62,7 +62,16 @@ internal class Program
                 case "1":
                     Console.Write("Name: ");
                     var addName = Console.ReadLine();
-                    var addDto = new AddTeamDto { Name = addName };
+
+                    Console.Write("Description: ");
+                    var addDescription = Console.ReadLine();
+
+                    var addDto = new AddTeamDto 
+                    { 
+                        Name = addName,
+                        Description = addDescription
+                    };
+
                     teamService.AddTeam(addDto);
                     Console.WriteLine("Team added successfully!");
                     break;
@@ -70,7 +79,7 @@ internal class Program
                 case "2":
                     var teams = teamService.GetAllTeams();
                     foreach (var t in teams)
-                        Console.WriteLine($"{t.TeamId} - {t.Name}");
+                        Console.WriteLine($"{t.TeamId} - {t.Name} - {t.Description}");
                     break;
 
                 case "3":
@@ -79,10 +88,15 @@ internal class Program
                     {
                         Console.Write("New Name: ");
                         var newName = Console.ReadLine();
+
+                        Console.Write("New Description: ");
+                        var newDescription = Console.ReadLine();
+
                         var updateDto = new UpdateTeamDTO
                         {
                             TeamId = updateId,
-                            Name = newName
+                            Name = newName,
+                            Description = newDescription
                         };
 
                         try
@@ -130,90 +144,104 @@ internal class Program
         Console.ReadKey();
     }
 
-
     void ManageCoaches(CoachService coachService)
+{
+    try
     {
-        try
+        Console.Clear();
+        Console.WriteLine("============> Coaches <======");
+        Console.WriteLine("1 Add");
+        Console.WriteLine("2 View All");
+        Console.WriteLine("3 Update");
+        Console.WriteLine("4 Delete");
+        var choice = Console.ReadLine();
+
+        switch (choice)
         {
-            Console.Clear();
-            Console.WriteLine("============> Coaches <======");
-            Console.WriteLine("1 Add");
-            Console.WriteLine("2 View All");
-            Console.WriteLine("3 Update");
-            Console.WriteLine("4 Delete");
-            var choice = Console.ReadLine();
+            case "1":
+                Console.Write("Name: ");
+                var addName = Console.ReadLine();
 
-            switch (choice)
-            {
-                case "1":
-                    Console.Write("Name: ");
-                    var addName = Console.ReadLine();
-                    var addDto = new AddCoachDto { Name = addName };
-                    coachService.AddCoach(addDto);
-                    Console.WriteLine("Coach added successfully!");
-                    break;
+                Console.Write("Description: ");
+                var addDescription = Console.ReadLine();
 
-                case "2":
-                    var coaches = coachService.GetAllCoaches();
-                    foreach (var c in coaches)
-                        Console.WriteLine($"{c.CoachId} - {c.Name}");
-                    break;
+                var addDto = new AddCoachDto
+                {
+                    Name = addName,
+                    Description = addDescription
+                };
 
-                case "3":
-                    Console.Write("Id: ");
-                    if (int.TryParse(Console.ReadLine(), out int updateId))
+                coachService.AddCoach(addDto);
+                Console.WriteLine("Coach added successfully!");
+                break;
+
+            case "2":
+                var coaches = coachService.GetAllCoaches();
+                foreach (var c in coaches)
+                    Console.WriteLine($"{c.CoachId} - {c.Name} - {c.Description}");
+                break;
+
+            case "3":
+                Console.Write("Id: ");
+                if (int.TryParse(Console.ReadLine(), out int updateId))
+                {
+                    Console.Write("New Name: ");
+                    var newName = Console.ReadLine();
+
+                    Console.Write("New Description: ");
+                    var newDescription = Console.ReadLine();
+
+                    var updateDto = new UpdateCoachDto
                     {
-                        Console.Write("New Name: ");
-                        var updateDto = new UpdateCoachDto
-                        {
-                            CoachId = updateId,
-                            Name = Console.ReadLine()
-                        };
+                        CoachId = updateId,
+                        Name = newName,
+                        Description = newDescription
+                    };
 
-                        try
-                        {
-                            coachService.UpdateCoach(updateDto);
-                            Console.WriteLine("Coach updated successfully!");
-                        }
-                        catch (KeyNotFoundException ex)
-                        {
-                            Console.WriteLine($"Update Error: {ex.Message}");
-                            LogError(ex);
-                        }
-                    }
-                    else
+                    try
                     {
-                        Console.WriteLine("Invalid Id!");
+                        coachService.UpdateCoach(updateDto);
+                        Console.WriteLine("Coach updated successfully!");
                     }
-                    break;
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Update Error: {ex.Message}");
+                        LogError(ex);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Id!");
+                }
+                break;
 
-                case "4":
-                    Console.Write("Id: ");
-                    if (int.TryParse(Console.ReadLine(), out int deleteId))
-                    {
-                        coachService.DeleteCoach(deleteId);
-                        Console.WriteLine("Coach deleted successfully!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Id!");
-                    }
-                    break;
+            case "4":
+                Console.Write("Id: ");
+                if (int.TryParse(Console.ReadLine(), out int deleteId))
+                {
+                    coachService.DeleteCoach(deleteId);
+                    Console.WriteLine("Coach deleted successfully!");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Id!");
+                }
+                break;
 
-                default:
-                    Console.WriteLine("Invalid choice");
-                    break;
-            }
+            default:
+                Console.WriteLine("Invalid choice");
+                break;
         }
-        catch (Exception ex) 
-        {
-            Console.WriteLine($"Unexpected Error: {ex.Message}");
-            LogError(ex);
-        }
-
-        Console.WriteLine("\nPress any key");
-        Console.ReadKey();
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Unexpected Error: {ex.Message}");
+        LogError(ex);
+    }
+
+    Console.WriteLine("\nPress any key");
+    Console.ReadKey();
+}
     void LogError(Exception ex)
     {
         try

@@ -14,30 +14,27 @@ namespace Football_Leage
 
         public void AddTeam(AddTeamDto teamDto)
         {
-            if (string.IsNullOrWhiteSpace(teamDto.Name))
+            try
             {
-                Console.WriteLine("Team name is required");
-                return;
+                var team = new Team(teamDto.Name, teamDto.Description);
+                _teamRepo.Add(team);
             }
-
-            var team = new Team
+            catch (Exception ex)
             {
-                Name = teamDto.Name,
-                CreationDate = DateTime.Now
-            };
-
-            _teamRepo.Add(team);
+                Console.WriteLine(ex.Message);
+            }
         }
+
         public void UpdateTeam(UpdateTeamDTO teamDto)
         {
             var team = _teamRepo.GetById(teamDto.TeamId);
+
             if (team == null)
-            {
-                throw new KeyNotFoundException($"Team with ID {teamDto.TeamId} not found.");
+                throw new KeyNotFoundException($"Team with ID {teamDto.TeamId} not found");
 
-            }
+            team.UpdateName(teamDto.Name);
+            team.UpdateDescription(teamDto.Description);
 
-            team.Name = teamDto.Name;
             _teamRepo.Update(team);
         }
 
