@@ -1,19 +1,16 @@
-﻿using Football_Leage;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Foorball_Leage
 {
-    internal class FootballLLeageDbContext: DbContext
+    internal class FootballLeagueDbContext : DbContext
     {
         public DbSet<Team> Teams { get; set; }
         public DbSet<Coach> Coaches { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=Dr-YOUSEF;Database=FootBallDB;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(
+                "Server=Dr-YOUSEF;Database=FootBallDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
     }
 }

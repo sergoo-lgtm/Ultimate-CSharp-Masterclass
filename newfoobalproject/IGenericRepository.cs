@@ -1,15 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Foorball_Leage
 {
     internal interface IGenericRepository<T>
     {
-        void Add(T entity);
-        void Update(T entity);
-        void Remove(int id);
-        T GetById(int id);
-        List<T> GetAll();
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task RemoveAsync(int id);
+        Task<T> GetByIdAsync(int id);
+        Task<List<T>> GetAllAsync();
+        
+        
+        
+        ///////
+        ///
+        ///
+        ///
+        IQueryable<T> Query { get; }
+
     }
 }

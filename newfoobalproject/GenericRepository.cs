@@ -1,43 +1,49 @@
-﻿using Foorball_Leage;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-internal class GenericRepository<T> : IGenericRepository<T> where T : class
+namespace Foorball_Leage
 {
-    private readonly FootballLLeageDbContext _context;
-
-    public GenericRepository(FootballLLeageDbContext context)
+    internal class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        _context = context;
-    }
+        private readonly FootballLeagueDbContext _context;
 
-    public void Add(T entity)
-    {
-        _context.Set<T>().Add(entity);
-        _context.SaveChanges();
-    }
-
-    public List<T> GetAll()
-    {
-        return _context.Set<T>().ToList();
-    }
-
-    public T GetById(int id)
-    {
-        return _context.Set<T>().Find(id);
-    }
-
-    public void Remove(int id)
-    {
-        var entity = GetById(id);
-        if (entity != null)
+        public GenericRepository(FootballLeagueDbContext context)
         {
-            _context.Set<T>().Remove(entity);
-            _context.SaveChanges();
+            _context = context;
         }
-    }
 
-    public void Update(T entity)
-    {
-        _context.Set<T>().Update(entity);
-        _context.SaveChanges();
+        public async Task AddAsync(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+        }
+
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+        public async Task RemoveAsync(int id)
+        {
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+                _context.Set<T>().Remove(entity);
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            await Task.CompletedTask;
+        }
+        
+        
+        /////
+        public IQueryable<T> Query => _context.Set<T>();
+
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Foorball_Leage;
-using Football_Leage;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 internal class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        using var context = new FootballLLeageDbContext();
+        using var context = new FootballLeagueDbContext();
         var unitOfWork = new UnitOfWork(context);
 
         var teamService = new TeamService(unitOfWork);
@@ -23,25 +24,35 @@ internal class Program
             Console.WriteLine("1 => Manage Teams");
             Console.WriteLine("2 => Manage Coaches");
             Console.WriteLine("3 => Add Team + Coach together");
-            Console.WriteLine("4 => Exit");
+            Console.WriteLine("4 => View Teams Ordered by Name (Query)");
+            Console.WriteLine("5 => View Coaches Ordered by Name (Query)");
+            Console.WriteLine("6 => Exit");
             Console.Write("Choose: ");
             var choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    program.ManageTeams(teamService, unitOfWork);
+                    await program.ManageTeamsAsync(teamService, unitOfWork);
                     break;
 
                 case "2":
-                    program.ManageCoaches(coachService, unitOfWork);
+                    await program.ManageCoachesAsync(coachService, unitOfWork);
                     break;
 
                 case "3":
-                    program.AddTeamAndCoachTogether(teamService, coachService, unitOfWork);
+                    await program.AddTeamAndCoachTogetherAsync(teamService, coachService, unitOfWork);
                     break;
 
                 case "4":
+                    await program.ViewTeamsQueryAsync(teamService);
+                    break;
+
+                case "5":
+                    await program.ViewCoachesQueryAsync(coachService);
+                    break;
+
+                case "6":
                     return;
 
                 default:
@@ -52,7 +63,7 @@ internal class Program
         }
     }
 
-    void ManageTeams(TeamService teamService, IUnitOfWork unitOfWork)
+    async Task ManageTeamsAsync(TeamService teamService, IUnitOfWork unitOfWork)
     {
         try
         {
@@ -73,13 +84,14 @@ internal class Program
                     Console.Write("Description: ");
                     var addDescription = Console.ReadLine();
 
-                    teamService.AddTeam(new AddTeamDto { Name = addName, Description = addDescription });
-                    unitOfWork.Save(); 
+                    await teamService.AddTeam(new AddTeamDto { Name = addName, Description = addDescription });
+                    await unitOfWork.SaveChangesAsync(); 
+
                     Console.WriteLine("Team added successfully!");
                     break;
 
                 case "2":
-                    var teams = teamService.GetAllTeams();
+                    var teams = await teamService.GetAllTeams();
                     foreach (var t in teams)
                         Console.WriteLine($"{t.TeamId} - {t.Name} - {t.Description}");
                     break;
@@ -100,8 +112,9 @@ internal class Program
                             Description = newDescription
                         };
 
-                        teamService.UpdateTeam(updateDto);
-                        unitOfWork.Save(); 
+                        await teamService.UpdateTeam(updateDto);
+                        await unitOfWork.SaveChangesAsync(); 
+
                         Console.WriteLine("Team updated successfully!");
                     }
                     else
@@ -114,8 +127,9 @@ internal class Program
                     Console.Write("Id: ");
                     if (int.TryParse(Console.ReadLine(), out int deleteId))
                     {
-                        teamService.DeleteTeam(deleteId);
-                        unitOfWork.Save();
+                        await teamService.DeleteTeam(deleteId);
+                        await unitOfWork.SaveChangesAsync(); 
+
                         Console.WriteLine("Team deleted successfully!");
                     }
                     else
@@ -139,7 +153,7 @@ internal class Program
         Console.ReadKey();
     }
 
-    void ManageCoaches(CoachService coachService, IUnitOfWork unitOfWork)
+    async Task ManageCoachesAsync(CoachService coachService, IUnitOfWork unitOfWork)
     {
         try
         {
@@ -160,13 +174,14 @@ internal class Program
                     Console.Write("Description: ");
                     var addDescription = Console.ReadLine();
 
-                    coachService.AddCoach(new AddCoachDto { Name = addName, Description = addDescription });
-                    unitOfWork.Save(); 
+                    await coachService.AddCoach(new AddCoachDto { Name = addName, Description = addDescription });
+                    await unitOfWork.SaveChangesAsync(); 
+
                     Console.WriteLine("Coach added successfully!");
                     break;
 
                 case "2":
-                    var coaches = coachService.GetAllCoach();
+                    var coaches = await coachService.GetAllCoach();
                     foreach (var c in coaches)
                         Console.WriteLine($"{c.CoachId} - {c.Name} - {c.Description}");
                     break;
@@ -187,8 +202,8 @@ internal class Program
                             Description = newDescription
                         };
 
-                        coachService.UpdateCoach(updateDto);
-                        unitOfWork.Save(); 
+                        await coachService.UpdateCoach(updateDto);
+                        await unitOfWork.SaveChangesAsync();
                         Console.WriteLine("Coach updated successfully!");
                     }
                     else
@@ -201,8 +216,9 @@ internal class Program
                     Console.Write("Id: ");
                     if (int.TryParse(Console.ReadLine(), out int deleteId))
                     {
-                        coachService.DeleteCoach(deleteId);
-                        unitOfWork.Save(); 
+                        await coachService.DeleteCoach(deleteId);
+                        await unitOfWork.SaveChangesAsync(); // <-- هنا الحفظ
+
                         Console.WriteLine("Coach deleted successfully!");
                     }
                     else
@@ -226,7 +242,7 @@ internal class Program
         Console.ReadKey();
     }
 
-    void AddTeamAndCoachTogether(TeamService teamService, CoachService coachService, IUnitOfWork unitOfWork)
+    async Task AddTeamAndCoachTogetherAsync(TeamService teamService, CoachService coachService, IUnitOfWork unitOfWork)
     {
         try
         {
@@ -246,10 +262,10 @@ internal class Program
             var teamDto = new AddTeamDto { Name = teamName, Description = teamDesc };
             var coachDto = new AddCoachDto { Name = coachName, Description = coachDesc };
 
-            teamService.AddTeam(teamDto);
-            coachService.AddCoach(coachDto);
+            await teamService.AddTeam(teamDto);
+            await coachService.AddCoach(coachDto);
+            await unitOfWork.SaveChangesAsync(); 
 
-            unitOfWork.Save(); 
             Console.WriteLine("Team and Coach added successfully!");
         }
         catch (Exception ex)
@@ -257,6 +273,42 @@ internal class Program
             Console.WriteLine($"Error adding team and coach: {ex.Message}");
             LogError(ex);
         }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+    async Task ViewTeamsQueryAsync(TeamService teamService)
+    {
+        Console.Clear();
+        Console.WriteLine("====== Teams Ordered by Name (Query) ======");
+        var teamsQuery = teamService.GetTeamsQuery();
+
+        var teams = teamsQuery
+            .Where(t => !string.IsNullOrEmpty(t.Name))
+            .OrderBy(t => t.Name)
+            .ToList();
+
+        foreach (var t in teams)
+            Console.WriteLine($"{t.TeamId} - {t.Name} - {t.Description}");
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+    async Task ViewCoachesQueryAsync(CoachService coachService)
+    {
+        Console.Clear();
+        Console.WriteLine("====== Coaches Ordered by Name (Query) ======");
+        var coachesQuery = coachService.GetCoachesQuery();
+
+        var coaches = coachesQuery
+            .Where(c => !string.IsNullOrEmpty(c.Name))
+            .OrderBy(c => c.Name)
+            .ToList();
+
+        foreach (var c in coaches)
+            Console.WriteLine($"{c.CoachId} - {c.Name} - {c.Description}");
 
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();

@@ -1,7 +1,5 @@
-﻿using Football_Leage;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Foorball_Leage
 {
@@ -14,33 +12,39 @@ namespace Foorball_Leage
             _unitOfWork = unitOfWork;
         }
 
-        public void AddCoach(AddCoachDto  addCoachDto)
+        public async Task AddCoach(AddCoachDto addCoachDto)
         {
             var coach = new Coach(addCoachDto.Name, addCoachDto.Description);
-            _unitOfWork.Coaches.Add(coach);
-
+            await _unitOfWork.Coaches.AddAsync(coach);
         }
 
-        public void UpdateCoach(UpdateCoachDto updateCoachDto)
+        public async Task UpdateCoach(UpdateCoachDto updateCoachDto)
         {
-            var coach = _unitOfWork.Coaches.GetById(updateCoachDto.CoachId);
+            var coach = await _unitOfWork.Coaches.GetByIdAsync(updateCoachDto.CoachId);
             coach.Update(updateCoachDto.Name, updateCoachDto.Description);
-            _unitOfWork.Coaches.Update(coach);
-
-        }
-        public void DeleteCoach(int id)
-        {
-            _unitOfWork.Coaches.Remove(id);
+            await _unitOfWork.Coaches.UpdateAsync(coach);
         }
 
-        public List<Coach> GetAllCoach()
+        public async Task DeleteCoach(int id)
         {
-            return _unitOfWork.Coaches.GetAll();
+            await _unitOfWork.Coaches.RemoveAsync(id);
         }
 
-        public Coach GetCoachById(int id)
+        public async Task<List<Coach>> GetAllCoach()
         {
-            return _unitOfWork.Coaches.GetById(id);
+            return await _unitOfWork.Coaches.GetAllAsync();
+        }
+
+        public async Task<Coach> GetCoachById(int id)
+        {
+            return await _unitOfWork.Coaches.GetByIdAsync(id);
+        }
+        
+        
+        
+        public IQueryable<Coach> GetCoachesQuery()
+        {
+            return _unitOfWork.Coaches.Query.OrderBy(c => c.Name);
         }
     }
 }

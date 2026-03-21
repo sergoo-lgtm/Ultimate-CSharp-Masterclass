@@ -1,8 +1,8 @@
-﻿using Football_Leage;
-using Microsoft.EntityFrameworkCore.Update.Internal;
+﻿using Foorball_Leage;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Foorball_Leage
 {
@@ -15,35 +15,43 @@ namespace Foorball_Leage
             _unitOfWork = unitOfWork;
         }
 
-        public void AddTeam(AddTeamDto addTeamDto)
+        public async Task AddTeam(AddTeamDto addTeamDto)
         {
-            var team = new Team( addTeamDto.Name,addTeamDto.Description);
-            _unitOfWork.Teams.Add(team);
+            var team = new Team(addTeamDto.Name, addTeamDto.Description);
 
+            await _unitOfWork.Teams.AddAsync(team);
         }
 
-        public void UpdateTeam(UpdateTeamDto updateTeamDto)
+        public async Task UpdateTeam(UpdateTeamDto updateTeamDto)
         {
-            var team = _unitOfWork.Teams.GetById(updateTeamDto.TeamId);
+            var team = await _unitOfWork.Teams.GetByIdAsync(updateTeamDto.TeamId);
+
             team.Update(updateTeamDto.Name, updateTeamDto.Description);
-            _unitOfWork.Teams.Update(team);
 
-
+            await _unitOfWork.Teams.UpdateAsync(team);
         }
-        public void DeleteTeam(int id)
+
+        public async Task DeleteTeam(int id)
         {
-            _unitOfWork.Teams.Remove(id);
+            await _unitOfWork.Teams.RemoveAsync(id);
         }
 
-        public List<Team> GetAllTeams()
+        public async Task<List<Team>> GetAllTeams()
         {
-            return _unitOfWork.Teams.GetAll();
+            return await _unitOfWork.Teams.GetAllAsync();
         }
 
-        public Team GetTeamById(int id)
+        public async Task<Team> GetTeamById(int id)
         {
-            return _unitOfWork.Teams.GetById(id);
+            return await _unitOfWork.Teams.GetByIdAsync(id);
         }
-
+        
+        
+        
+        public IQueryable<Team> GetTeamsQuery()
+        {
+            // دلوقتي ممكن تعمل فلتر أو أوردر قبل التنفيذ
+            return _unitOfWork.Teams.Query.OrderBy(t => t.Name);
+        }
     }
 }
