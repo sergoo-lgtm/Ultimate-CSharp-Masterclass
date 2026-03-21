@@ -6,13 +6,12 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        
         using var context = new FootballLeageDBContect();
+        var unitOfWork = new UnitOfWork(context);
 
-        var teamRepo = new GenericRepository<Team>(context);
-        var coachRepo = new GenericRepository<Coach>(context);
-
-        var teamService = new TeamService(teamRepo);
-        var coachService = new CoachService(coachRepo);
+        var teamService = new TeamService(unitOfWork);
+        var coachService = new CoachService(unitOfWork);
 
         var program = new Program(); 
 
@@ -28,11 +27,11 @@ internal class Program
             switch (choice)
             {
                 case "1":
-                    program.ManageTeams(teamService);
+                    program.ManageTeams(teamService, unitOfWork); // ✅ صح
                     break;
 
                 case "2":
-                    program.ManageCoaches(coachService);
+                    program.ManageCoaches(coachService, unitOfWork); // ✅ صح
                     break;
 
                 case "3":
@@ -45,7 +44,9 @@ internal class Program
             }
         }
     }
-    void ManageTeams(TeamService teamService)
+    
+
+    void ManageTeams(TeamService teamService, IUnitOfWork unitOfWork)
     {
         try
         {
@@ -73,6 +74,7 @@ internal class Program
                     };
 
                     teamService.AddTeam(addDto);
+                    unitOfWork.Save();
                     Console.WriteLine("Team added successfully!");
                     break;
 
@@ -102,6 +104,8 @@ internal class Program
                         try
                         {
                             teamService.UpdateTeam(updateDto);
+                            unitOfWork.Save();
+
                             Console.WriteLine("Team updated successfully!");
                         }
                         catch (KeyNotFoundException ex) 
@@ -121,6 +125,8 @@ internal class Program
                     if (int.TryParse(Console.ReadLine(), out int deleteId))
                     {
                         teamService.DeleteTeam(deleteId);
+                        unitOfWork.Save();
+
                         Console.WriteLine("Team deleted successfully!");
                     }
                     else
@@ -144,7 +150,7 @@ internal class Program
         Console.ReadKey();
     }
 
-    void ManageCoaches(CoachService coachService)
+    void ManageCoaches(CoachService coachService, IUnitOfWork unitOfWork)
 {
     try
     {
@@ -172,6 +178,8 @@ internal class Program
                 };
 
                 coachService.AddCoach(addDto);
+                unitOfWork.Save();
+
                 Console.WriteLine("Coach added successfully!");
                 break;
 
@@ -201,6 +209,8 @@ internal class Program
                     try
                     {
                         coachService.UpdateCoach(updateDto);
+                        unitOfWork.Save();
+
                         Console.WriteLine("Coach updated successfully!");
                     }
                     catch (Exception ex)
@@ -220,6 +230,8 @@ internal class Program
                 if (int.TryParse(Console.ReadLine(), out int deleteId))
                 {
                     coachService.DeleteCoach(deleteId);
+                    unitOfWork.Save();
+
                     Console.WriteLine("Coach deleted successfully!");
                 }
                 else

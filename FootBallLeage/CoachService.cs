@@ -5,11 +5,11 @@ namespace Football_Leage
 {
     internal class CoachService
     {
-        private readonly IGenericRepository<Coach> _coachRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CoachService(IGenericRepository<Coach> coachRepo)
+        public CoachService(IUnitOfWork unitOfWork)
         {
-            _coachRepo = coachRepo;
+            _unitOfWork = unitOfWork;
         }
 
         public void AddCoach(AddCoachDto coachDto)
@@ -17,7 +17,7 @@ namespace Football_Leage
             try
             {
                 var coach = new Coach(coachDto.Name, coachDto.Description);
-                _coachRepo.Add(coach);
+                _unitOfWork.Coaches.Add(coach);
             }
             catch (Exception ex)
             {
@@ -27,7 +27,7 @@ namespace Football_Leage
 
         public void UpdateCoach(UpdateCoachDto coachDto)
         {
-            var coach = _coachRepo.GetById(coachDto.CoachId);
+            var coach = _unitOfWork.Coaches.GetById(coachDto.CoachId);
 
             if (coach == null)
                 throw new KeyNotFoundException($"Coach with ID {coachDto.CoachId} not found.");
@@ -35,22 +35,22 @@ namespace Football_Leage
             coach.UpdateName(coachDto.Name);
             coach.UpdateDescription(coachDto.Description);
 
-            _coachRepo.Update(coach);
+            _unitOfWork.Coaches.Update(coach);
         }
 
         public void DeleteCoach(int id)
         {
-            _coachRepo.Remove(id);
+            _unitOfWork.Coaches.Remove(id);
         }
 
         public List<Coach> GetAllCoaches()
         {
-            return _coachRepo.GetAll();
+            return _unitOfWork.Coaches.GetAll();
         }
 
         public Coach GetCoachById(int id)
         {
-            return _coachRepo.GetById(id);
+            return _unitOfWork.Coaches.GetById(id);
         }
     }
 }

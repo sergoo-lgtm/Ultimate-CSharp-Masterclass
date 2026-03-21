@@ -5,11 +5,11 @@ namespace Football_Leage
 {
     internal class TeamService
     {
-        private readonly IGenericRepository<Team> _teamRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TeamService(IGenericRepository<Team> teamRepo)
+        public TeamService(IUnitOfWork unitOfWork)
         {
-            _teamRepo = teamRepo;
+            _unitOfWork = unitOfWork;
         }
 
         public void AddTeam(AddTeamDto teamDto)
@@ -17,7 +17,7 @@ namespace Football_Leage
             try
             {
                 var team = new Team(teamDto.Name, teamDto.Description);
-                _teamRepo.Add(team);
+                _unitOfWork.Teams.Add(team);
             }
             catch (Exception ex)
             {
@@ -27,7 +27,7 @@ namespace Football_Leage
 
         public void UpdateTeam(UpdateTeamDTO teamDto)
         {
-            var team = _teamRepo.GetById(teamDto.TeamId);
+            var team = _unitOfWork.Teams.GetById(teamDto.TeamId);
 
             if (team == null)
                 throw new KeyNotFoundException($"Team with ID {teamDto.TeamId} not found");
@@ -35,22 +35,22 @@ namespace Football_Leage
             team.UpdateName(teamDto.Name);
             team.UpdateDescription(teamDto.Description);
 
-            _teamRepo.Update(team);
+            _unitOfWork.Teams.Update(team);
         }
 
         public void DeleteTeam(int id)
         {
-            _teamRepo.Remove(id);
+            _unitOfWork.Teams.Remove(id);
         }
 
         public List<Team> GetAllTeams()
         {
-            return _teamRepo.GetAll();
+            return _unitOfWork.Teams.GetAll();
         }
 
         public Team GetTeamById(int id)
         {
-            return _teamRepo.GetById(id);
+            return _unitOfWork.Teams.GetById(id);
         }
     }
 }
