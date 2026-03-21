@@ -27,11 +27,11 @@ internal class Program
             switch (choice)
             {
                 case "1":
-                    program.ManageTeams(teamService, unitOfWork); // ✅ صح
+                    program.ManageTeams(teamService, unitOfWork); 
                     break;
 
                 case "2":
-                    program.ManageCoaches(coachService, unitOfWork); // ✅ صح
+                    program.ManageCoaches(coachService, unitOfWork); 
                     break;
 
                 case "3":

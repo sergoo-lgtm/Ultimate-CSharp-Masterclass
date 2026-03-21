@@ -5,9 +5,9 @@
     public DateTime CreationDate { get; private set; }
     public string Description { get; private set; }
 
-    public Coach()
+    private Coach()
     {
-        
+
     }
 
     public Coach(string coachName, string description)
@@ -17,20 +17,21 @@
         CreationDate = DateTime.Now;
     }
 
-    public void UpdateName(string newName)
+    public void Update(string? newName = null,string? newDescription=null)
     {
-        SetName(newName);
-    }
-
-    public void UpdateDescription(string newDescription)
-    {
+        if (newName != null)
+        {
+            SetName(newName);
+        }
+        if(newDescription != null)
         SetDescription(newDescription);
     }
+
 
     private void SetName(string newName)
     {
         if (string.IsNullOrWhiteSpace(newName))
-            throw new Exception("Coach name is required");
+            throw new ArgumentException("Coach name is required");
 
         Name = newName;
     }
@@ -38,7 +39,7 @@
     private void SetDescription(string newDescription)
     {
         if (string.IsNullOrWhiteSpace(newDescription))
-            throw new Exception("Description is required");
+            throw new ArgumentException("Description is required");
 
         Description = newDescription;
     }

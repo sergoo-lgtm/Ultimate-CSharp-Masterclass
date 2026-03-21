@@ -9,17 +9,17 @@ internal class Team
     public int TeamId { get; private set; }
     public string Name { get; private set; }
     public DateTime CreationDate { get; private set; }
-    
+
     public string Description { get; private set; }
 
-    public Team()
+    private Team()
     {
-        
+
     }
 
     public Team(string teamName, string description)
     {
-        SetName(teamName); 
+        SetName(teamName);
 
         CreationDate = DateTime.Now;
 
@@ -27,28 +27,34 @@ internal class Team
 
     }
 
-    public void UpdateName(string newName)
+    public void Update(string? newName=null, string? newDescription=null)
     {
-        SetName(newName);
+        if(newName != null)
+            SetName(newName);
+
+        if (newDescription != null)
+            SetDescription(newDescription);
+
     }
+   
 
     private void SetName(string newName)
     {
         if (string.IsNullOrWhiteSpace(newName))
-            throw new Exception("Team name is required");
+            throw new ArgumentException("Team name is required");
 
         Name = newName;
     }
-    public void UpdateDescription(string newDescription)
-    {
-        SetDescription(newDescription);
-    }
-    
+
+
+
+
+
     private void SetDescription(string newDescription)
     {
         if (string.IsNullOrWhiteSpace(newDescription))
-            throw new Exception("description is required");
-        
+            throw new ArgumentException("description is required");
+
 
         Description = newDescription;
     }
